@@ -1,1 +1,3 @@
 1. We are creating a system that needs to have different implemntations for each of the storage mediums with a shared public interface. The interface should allow saving and loading of the values of a fixed set of types. So if we have an interface that satisfies this, each medium will need an implementation of that interface and can be fed into the main class that saves and loads data. This will satisfy the open-close principle and new implementations can be created in the future without a need to modify the old ones or the main class except for the "factory"-like part where one of the implementations is constructed and fed in.
+
+2. Now that we have the common interface, 2 of 3 implementations, and some AI-generated tests. We will switch to the file based medium.
