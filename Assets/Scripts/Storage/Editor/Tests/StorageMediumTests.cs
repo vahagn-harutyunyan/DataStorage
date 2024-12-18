@@ -5,6 +5,7 @@ namespace Storage.Editor.Tests
 {
     [TestFixture(typeof(PlayerPrefsStorageMedium))]
     [TestFixture(typeof(InMemoryStorageMedium))]
+    [TestFixture(typeof(FileStorageMedium))]
     public class StorageMediumTests<T> where T : IStorageMedium, new()
     {
         private IStorageMedium _storage;
