@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Storage
 {
     public class StoredPropertyManager
@@ -14,9 +16,9 @@ namespace Storage
             PlayerLevel = new IntStoredProperty("PlayerLevel", 0, _storageManager, true);
         }
 
-        public void StoreProperties()
+        public async Task StoreProperties()
         {
-            _storageManager.Store();
+            await _storageManager.StoreAsync();
         }
     }
 }

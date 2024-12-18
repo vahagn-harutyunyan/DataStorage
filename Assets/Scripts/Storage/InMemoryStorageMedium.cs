@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Storage
 {
@@ -79,6 +80,11 @@ namespace Storage
         public void Store()
         {
             //
+        }
+
+        public Task StoreAsync()
+        {
+            return Task.CompletedTask;
         }
 
         public void Clear()

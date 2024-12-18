@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Storage
@@ -69,6 +70,11 @@ namespace Storage
         public void Store()
         {
             _storageMedium.Store();
+        }
+
+        public async Task StoreAsync()
+        {
+            await _storageMedium.StoreAsync();
         }
 
         public void Clear()

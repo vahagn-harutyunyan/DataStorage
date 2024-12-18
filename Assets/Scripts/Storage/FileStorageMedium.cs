@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Storage
@@ -27,6 +29,8 @@ namespace Storage
         private readonly Dictionary<string, float> _floatData = new Dictionary<string, float>();
         private readonly Dictionary<string, bool> _boolData = new Dictionary<string, bool>();
         private readonly Dictionary<string, string> _stringData = new Dictionary<string, string>();
+        
+        private readonly SemaphoreSlim _storeSemaphore = new SemaphoreSlim(1, 1);
 
         public FileStorageMedium(string filePath)
         {
@@ -143,6 +147,11 @@ namespace Storage
 
         public void Store()
         {
+            Task.Run(async () => await StoreAsync()).Wait();
+        }
+
+        public async Task StoreAsync()
+        {
             var dict = new SerializableDictionary();
             foreach (var kvp in _intData)
             {
@@ -172,9 +181,10 @@ namespace Storage
                 dict.values.Add(kvp.Value);
             }
 
-
             var json = JsonUtility.ToJson(dict, true);
-            File.WriteAllText(_filePath, json);
+            await _storeSemaphore.WaitAsync();
+            await File.WriteAllTextAsync(_filePath, json);
+            _storeSemaphore.Release();
         }
 
         public void Clear()

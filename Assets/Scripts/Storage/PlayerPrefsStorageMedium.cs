@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Storage
@@ -82,6 +83,12 @@ namespace Storage
         public void Store()
         {
             PlayerPrefs.Save();
+        }
+
+        public Task StoreAsync()
+        {
+            Store();
+            return Task.CompletedTask;
         }
 
         public void Clear()

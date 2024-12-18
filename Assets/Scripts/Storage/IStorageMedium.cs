@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Storage
 {
     public interface IStorageMedium
@@ -17,6 +19,7 @@ namespace Storage
         bool LoadBool(string key);
 
         void Store();
+        Task StoreAsync();
 
         void Clear();
     }

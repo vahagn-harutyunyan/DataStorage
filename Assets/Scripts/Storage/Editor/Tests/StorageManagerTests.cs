@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace Storage.Editor.Tests
@@ -16,47 +17,47 @@ namespace Storage.Editor.Tests
         }
 
         [Test]
-        public void SaveAndLoadInt()
+        public async Task SaveAndLoadInt()
         {
             _storageManager.SaveInt("testInt", 42);
-            _storageManager.Store();
+            await _storageManager.StoreAsync();
             Assert.AreEqual(42, _storageManager.LoadInt("testInt"));
         }
 
         [Test]
-        public void SaveAndLoadFloat()
+        public async Task SaveAndLoadFloat()
         {
             _storageManager.SaveFloat("testFloat", 3.14f);
-            _storageManager.Store();
+            await _storageManager.StoreAsync();
             Assert.AreEqual(3.14f, _storageManager.LoadFloat("testFloat"));
         }
 
         [Test]
-        public void SaveAndLoadString()
+        public async Task SaveAndLoadString()
         {
             _storageManager.SaveString("testString", "Hello");
-            _storageManager.Store();
+            await _storageManager.StoreAsync();
             Assert.AreEqual("Hello", _storageManager.LoadString("testString"));
         }
 
         [Test]
-        public void SaveAndLoadBool()
+        public async Task SaveAndLoadBool()
         {
             _storageManager.SaveBool("testBool", true);
-            _storageManager.Store();
+            await _storageManager.StoreAsync();
             Assert.IsTrue(_storageManager.LoadBool("testBool"));
 
             _storageManager.SaveBool("testBoolFalse", false);
-            _storageManager.Store();
+            await _storageManager.StoreAsync();
             Assert.IsFalse(_storageManager.LoadBool("testBoolFalse"));
         }
 
         [Test]
-        public void SaveAndLoadObject()
+        public async Task SaveAndLoadObject()
         {
             var complexObject = new TestData { Id = 123, Name = "TestName", Active = true };
             _storageManager.SaveObject("testObject", complexObject);
-            _storageManager.Store();
+            await _storageManager.StoreAsync();
             var loadedObject = _storageManager.LoadObject<TestData>("testObject");
             Assert.NotNull(loadedObject);
             Assert.AreEqual(complexObject.Id, loadedObject.Id);
@@ -71,10 +72,10 @@ namespace Storage.Editor.Tests
         }
 
         [Test]
-        public void Clear_RemovesAllEntries()
+        public async Task Clear_RemovesAllEntries()
         {
             _storageManager.SaveInt("toClear", 100);
-            _storageManager.Store();
+            await _storageManager.StoreAsync();
             _storageManager.Clear();
             Assert.Throws<ArgumentException>(() => _storageManager.LoadInt("toClear"));
         }

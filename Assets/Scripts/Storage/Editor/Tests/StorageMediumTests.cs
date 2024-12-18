@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace Storage.Editor.Tests
@@ -20,12 +21,12 @@ namespace Storage.Editor.Tests
         #region Int Tests
 
         [Test]
-        public void SaveAndLoadInt_StoresAndRetrievesValue()
+        public async Task SaveAndLoadInt_StoresAndRetrievesValue()
         {
             const string key = "TestInt";
             const int valueToSave = 42;
             _storage.SaveInt(key, valueToSave);
-            _storage.Store();
+            await _storage.StoreAsync();
             var loadedValue = _storage.LoadInt(key);
             Assert.AreEqual(valueToSave, loadedValue);
         }
@@ -38,13 +39,13 @@ namespace Storage.Editor.Tests
         }
 
         [Test]
-        public void OverwriteExistingIntKey()
+        public async Task OverwriteExistingIntKey()
         {
             const string key = "OverwrittenIntKey";
             _storage.SaveInt(key, 100);
-            _storage.Store();
+            await _storage.StoreAsync();
             _storage.SaveInt(key, 200);
-            _storage.Store();
+            await _storage.StoreAsync();
             Assert.AreEqual(200, _storage.LoadInt(key));
         }
 
@@ -53,12 +54,12 @@ namespace Storage.Editor.Tests
         #region Float Tests
 
         [Test]
-        public void SaveAndLoadFloat_StoresAndRetrievesValue()
+        public async Task SaveAndLoadFloat_StoresAndRetrievesValue()
         {
             const string key = "TestFloat";
             const float valueToSave = 3.14159f;
             _storage.SaveFloat(key, valueToSave);
-            _storage.Store();
+            await _storage.StoreAsync();
             var loadedValue = _storage.LoadFloat(key);
             Assert.AreEqual(valueToSave, loadedValue, 0.0001f);
         }
@@ -71,13 +72,13 @@ namespace Storage.Editor.Tests
         }
 
         [Test]
-        public void OverwriteExistingFloatKey()
+        public async Task OverwriteExistingFloatKey()
         {
             const string key = "OverwrittenFloatKey";
             _storage.SaveFloat(key, 1.23f);
-            _storage.Store();
+            await _storage.StoreAsync();
             _storage.SaveFloat(key, 4.56f);
-            _storage.Store();
+            await _storage.StoreAsync();
             Assert.AreEqual(4.56f, _storage.LoadFloat(key), 0.0001f);
         }
 
@@ -86,12 +87,12 @@ namespace Storage.Editor.Tests
         #region String Tests
 
         [Test]
-        public void SaveAndLoadString_StoresAndRetrievesValue()
+        public async Task SaveAndLoadString_StoresAndRetrievesValue()
         {
             const string key = "TestString";
             const string valueToSave = "Hello, World!";
             _storage.SaveString(key, valueToSave);
-            _storage.Store();
+            await _storage.StoreAsync();
             var loadedValue = _storage.LoadString(key);
             Assert.AreEqual(valueToSave, loadedValue);
         }
@@ -104,23 +105,23 @@ namespace Storage.Editor.Tests
         }
 
         [Test]
-        public void OverwriteExistingStringKey()
+        public async Task OverwriteExistingStringKey()
         {
             const string key = "OverwrittenStringKey";
             _storage.SaveString(key, "FirstValue");
-            _storage.Store();
+            await _storage.StoreAsync();
             _storage.SaveString(key, "SecondValue");
-            _storage.Store();
+            await _storage.StoreAsync();
             Assert.AreEqual("SecondValue", _storage.LoadString(key));
         }
 
         [Test]
-        public void SaveAndLoadEmptyString_StoresAndRetrievesValue()
+        public async Task SaveAndLoadEmptyString_StoresAndRetrievesValue()
         {
             const string key = "EmptyStringKey";
             var valueToSave = string.Empty;
             _storage.SaveString(key, valueToSave);
-            _storage.Store();
+            await _storage.StoreAsync();
             var loadedValue = _storage.LoadString(key);
             Assert.AreEqual(valueToSave, loadedValue);
         }
@@ -130,21 +131,21 @@ namespace Storage.Editor.Tests
         #region Bool Tests
 
         [Test]
-        public void SaveAndLoadBool_TrueValue()
+        public async Task SaveAndLoadBool_TrueValue()
         {
             const string key = "TestBoolTrue";
             _storage.SaveBool(key, true);
-            _storage.Store();
+            await _storage.StoreAsync();
             var loadedValue = _storage.LoadBool(key);
             Assert.IsTrue(loadedValue);
         }
 
         [Test]
-        public void SaveAndLoadBool_FalseValue()
+        public async Task SaveAndLoadBool_FalseValue()
         {
             const string key = "TestBoolFalse";
             _storage.SaveBool(key, false);
-            _storage.Store();
+            await _storage.StoreAsync();
             var loadedValue = _storage.LoadBool(key);
             Assert.IsFalse(loadedValue);
         }
@@ -157,13 +158,13 @@ namespace Storage.Editor.Tests
         }
 
         [Test]
-        public void OverwriteExistingBoolKey()
+        public async Task OverwriteExistingBoolKey()
         {
             const string key = "OverwrittenBoolKey";
             _storage.SaveBool(key, true);
-            _storage.Store();
+            await _storage.StoreAsync();
             _storage.SaveBool(key, false);
-            _storage.Store();
+            await _storage.StoreAsync();
             Assert.IsFalse(_storage.LoadBool(key));
         }
 
