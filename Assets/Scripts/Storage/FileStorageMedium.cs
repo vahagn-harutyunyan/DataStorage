@@ -46,7 +46,7 @@ namespace Storage
 
         public int LoadInt(string key)
         {
-            return Load(key, _intData);
+            return _intData.Load(key);
         }
 
         public void SaveFloat(string key, float value)
@@ -57,7 +57,7 @@ namespace Storage
 
         public float LoadFloat(string key)
         {
-            return Load(key, _floatData);
+            return _floatData.Load(key);
         }
 
         public void SaveString(string key, string value)
@@ -68,7 +68,7 @@ namespace Storage
 
         public string LoadString(string key)
         {
-            return Load(key, _stringData);
+            return _stringData.Load(key);
         }
 
         public void SaveBool(string key, bool value)
@@ -79,7 +79,7 @@ namespace Storage
 
         public bool LoadBool(string key)
         {
-            return Load(key, _boolData);
+            return _boolData.Load(key);
         }
 
         private void LoadFromFile()
@@ -161,21 +161,6 @@ namespace Storage
             _floatData.Clear();
             _boolData.Clear();
             _stringData.Clear();
-        }
-
-        private static T Load<T>(string key, Dictionary<string, T> storage)
-        {
-            if (storage.TryGetValue(key, out var value))
-            {
-                return value;
-            }
-
-            throw CreateException(key);
-        }
-
-        private static ArgumentException CreateException(string key)
-        {
-            return new ArgumentException($"No value is set for the key {key}.");
         }
     }
 }
