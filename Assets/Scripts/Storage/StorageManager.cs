@@ -11,6 +11,11 @@ namespace Storage
             _storageMedium = storageMedium;
         }
 
+        public bool HasValue<T>(string name)
+        {
+            return _storageMedium.HasValue<string>(name);
+        }
+
         public void SaveInt(string key, int value)
         {
             _storageMedium.SaveInt(key, value);

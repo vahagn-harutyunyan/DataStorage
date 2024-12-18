@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Storage
@@ -8,6 +9,32 @@ namespace Storage
         private readonly Dictionary<string, float> _floatData = new Dictionary<string, float>();
         private readonly Dictionary<string, string> _stringData = new Dictionary<string, string>();
         private readonly Dictionary<string, bool> _boolData = new Dictionary<string, bool>();
+
+        public bool HasValue<T>(string name)
+        {
+            var type = typeof(T);
+            if (type ==  typeof(int))
+            {
+                return _intData.ContainsKey(name);
+            }
+
+            if (type ==  typeof(float))
+            {
+                return _floatData.ContainsKey(name);
+            }
+
+            if (type ==  typeof(bool))
+            {
+                return _boolData.ContainsKey(name);
+            }
+
+            if (type ==  typeof(string))
+            {
+                return _stringData.ContainsKey(name);
+            }
+
+            throw new ArgumentException($"Invalid data type {type}.");
+        }
 
         public void SaveInt(string key, int value)
         {

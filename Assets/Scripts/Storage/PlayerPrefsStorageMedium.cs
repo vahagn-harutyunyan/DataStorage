@@ -5,6 +5,20 @@ namespace Storage
 {
     public class PlayerPrefsStorageMedium : IStorageMedium
     {
+        public bool HasValue<T>(string name)
+        {
+            var type = typeof(T);
+            if (type == typeof(int) ||
+                type == typeof(float) ||
+                type == typeof(bool) ||
+                type == typeof(string))
+            {
+                return PlayerPrefs.HasKey(name);
+            }
+
+            throw new ArgumentException($"Invalid data type {type}.");
+        }
+
         public void SaveInt(string key, int value)
         {
             PlayerPrefs.SetInt(key, value);

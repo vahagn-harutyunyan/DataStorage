@@ -2,6 +2,8 @@ namespace Storage
 {
     public interface IStorageMedium
     {
+        bool HasValue<T>(string name);
+        
         void SaveInt(string key, int value);
         int LoadInt(string key);
 
