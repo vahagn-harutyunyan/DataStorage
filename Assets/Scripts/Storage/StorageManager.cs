@@ -61,6 +61,11 @@ namespace Storage
             return JsonConvert.DeserializeObject<T>(LoadString(key));
         }
 
+        public void Store()
+        {
+            _storageMedium.Store();
+        }
+
         public void Clear()
         {
             _storageMedium.Clear();

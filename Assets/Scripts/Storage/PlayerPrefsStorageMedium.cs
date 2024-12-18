@@ -8,7 +8,6 @@ namespace Storage
         public void SaveInt(string key, int value)
         {
             PlayerPrefs.SetInt(key, value);
-            PlayerPrefs.Save();
         }
 
         public int LoadInt(string key)
@@ -24,7 +23,6 @@ namespace Storage
         public void SaveFloat(string key, float value)
         {
             PlayerPrefs.SetFloat(key, value);
-            PlayerPrefs.Save();
         }
 
         public float LoadFloat(string key)
@@ -40,7 +38,6 @@ namespace Storage
         public void SaveString(string key, string value)
         {
             PlayerPrefs.SetString(key, value);
-            PlayerPrefs.Save();
         }
 
         public string LoadString(string key)
@@ -56,7 +53,6 @@ namespace Storage
         public void SaveBool(string key, bool value)
         {
             PlayerPrefs.SetInt(key, value ? 1 : 0);
-            PlayerPrefs.Save();
         }
 
         public bool LoadBool(string key)
@@ -67,6 +63,11 @@ namespace Storage
             }
 
             throw CreateException(key);
+        }
+
+        public void Store()
+        {
+            PlayerPrefs.Save();
         }
 
         public void Clear()

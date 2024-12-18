@@ -49,6 +49,11 @@ namespace Storage
             return _boolData.Load(key);
         }
 
+        public void Store()
+        {
+            //
+        }
+
         public void Clear()
         {
             _intData.Clear();

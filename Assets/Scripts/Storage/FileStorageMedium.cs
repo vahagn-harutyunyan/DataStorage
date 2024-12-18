@@ -41,7 +41,6 @@ namespace Storage
         public void SaveInt(string key, int value)
         {
             _intData[key] = value;
-            SaveToFile();
         }
 
         public int LoadInt(string key)
@@ -52,7 +51,6 @@ namespace Storage
         public void SaveFloat(string key, float value)
         {
             _floatData[key] = value;
-            SaveToFile();
         }
 
         public float LoadFloat(string key)
@@ -63,7 +61,6 @@ namespace Storage
         public void SaveString(string key, string value)
         {
             _stringData[key] = value;
-            SaveToFile();
         }
 
         public string LoadString(string key)
@@ -74,7 +71,6 @@ namespace Storage
         public void SaveBool(string key, bool value)
         {
             _boolData[key] = value;
-            SaveToFile();
         }
 
         public bool LoadBool(string key)
@@ -119,7 +115,7 @@ namespace Storage
             }
         }
 
-        private void SaveToFile()
+        public void Store()
         {
             var dict = new SerializableDictionary();
             foreach (var kvp in _intData)

@@ -25,7 +25,7 @@ namespace Storage.Editor.Tests
             const string key = "TestInt";
             const int valueToSave = 42;
             _storage.SaveInt(key, valueToSave);
-
+            _storage.Store();
             var loadedValue = _storage.LoadInt(key);
             Assert.AreEqual(valueToSave, loadedValue);
         }
@@ -42,8 +42,9 @@ namespace Storage.Editor.Tests
         {
             const string key = "OverwrittenIntKey";
             _storage.SaveInt(key, 100);
+            _storage.Store();
             _storage.SaveInt(key, 200);
-
+            _storage.Store();
             Assert.AreEqual(200, _storage.LoadInt(key));
         }
 
@@ -57,7 +58,7 @@ namespace Storage.Editor.Tests
             const string key = "TestFloat";
             const float valueToSave = 3.14159f;
             _storage.SaveFloat(key, valueToSave);
-
+            _storage.Store();
             var loadedValue = _storage.LoadFloat(key);
             Assert.AreEqual(valueToSave, loadedValue, 0.0001f);
         }
@@ -74,8 +75,9 @@ namespace Storage.Editor.Tests
         {
             const string key = "OverwrittenFloatKey";
             _storage.SaveFloat(key, 1.23f);
+            _storage.Store();
             _storage.SaveFloat(key, 4.56f);
-
+            _storage.Store();
             Assert.AreEqual(4.56f, _storage.LoadFloat(key), 0.0001f);
         }
 
@@ -89,7 +91,7 @@ namespace Storage.Editor.Tests
             const string key = "TestString";
             const string valueToSave = "Hello, World!";
             _storage.SaveString(key, valueToSave);
-
+            _storage.Store();
             var loadedValue = _storage.LoadString(key);
             Assert.AreEqual(valueToSave, loadedValue);
         }
@@ -106,8 +108,9 @@ namespace Storage.Editor.Tests
         {
             const string key = "OverwrittenStringKey";
             _storage.SaveString(key, "FirstValue");
+            _storage.Store();
             _storage.SaveString(key, "SecondValue");
-
+            _storage.Store();
             Assert.AreEqual("SecondValue", _storage.LoadString(key));
         }
 
@@ -117,7 +120,7 @@ namespace Storage.Editor.Tests
             const string key = "EmptyStringKey";
             var valueToSave = string.Empty;
             _storage.SaveString(key, valueToSave);
-
+            _storage.Store();
             var loadedValue = _storage.LoadString(key);
             Assert.AreEqual(valueToSave, loadedValue);
         }
@@ -131,7 +134,7 @@ namespace Storage.Editor.Tests
         {
             const string key = "TestBoolTrue";
             _storage.SaveBool(key, true);
-
+            _storage.Store();
             var loadedValue = _storage.LoadBool(key);
             Assert.IsTrue(loadedValue);
         }
@@ -141,7 +144,7 @@ namespace Storage.Editor.Tests
         {
             const string key = "TestBoolFalse";
             _storage.SaveBool(key, false);
-
+            _storage.Store();
             var loadedValue = _storage.LoadBool(key);
             Assert.IsFalse(loadedValue);
         }
@@ -158,8 +161,9 @@ namespace Storage.Editor.Tests
         {
             const string key = "OverwrittenBoolKey";
             _storage.SaveBool(key, true);
+            _storage.Store();
             _storage.SaveBool(key, false);
-
+            _storage.Store();
             Assert.IsFalse(_storage.LoadBool(key));
         }
 

@@ -14,6 +14,8 @@ namespace Storage
         void SaveBool(string key, bool value);
         bool LoadBool(string key);
 
+        void Store();
+
         void Clear();
     }
 }
